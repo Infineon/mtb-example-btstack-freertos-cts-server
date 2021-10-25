@@ -1,11 +1,10 @@
 /******************************************************************************
-* File Name:   app_bt_utils.h
+* File Name: cts_server.h
 *
-* Description: This file consists of the utility functions that will help
-*              debugging and developing the applications easier with much more
-*              meaningful information.
+* Description: This file contains macros, and function prototypes used in
+*              cts_server.c file.
 *
-* Related Document: See Readme.md
+* Related Document: See README.md
 *
 *******************************************************************************
 * Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
@@ -40,38 +39,43 @@
 * so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
-#ifndef __APP_BT_UTILS_H__
-#define __APP_BT_UTILS_H__
-
-/******************************************************************************
- *                                INCLUDES
- ******************************************************************************/
+/*******************************************************************************
+*        Header Files
+*******************************************************************************/
 #include "wiced_bt_dev.h"
-#include "wiced_bt_gatt.h"
-#include <stdio.h>
+#include <FreeRTOS.h>
+#include <task.h>
+#include "timers.h"
 
-/******************************************************************************
- *                                Constants
+/*******************************************************************************
+*        Macro Definitions
+*******************************************************************************/
+#define STRING_BUFFER_SIZE              (80u)
+#define DAYS_PER_WEEK                   (7u)
+
+/* Structure tm stores years since 1900 */
+#define TM_YEAR_BASE                    (1900u)
+
+/* Macros for button interrupt and button task */
+/* Interrupt priority for the GPIO connected to the user button */
+#define BUTTON_INTERRUPT_PRIORITY       (7u)
+#define BUTTON_TASK_PRIORITY            (configMAX_PRIORITIES - 1)
+#define BUTTON_TASK_STACK_SIZE          (configMINIMAL_STACK_SIZE * 2)
+
+/*******************************************************************************
+ * Extern variables
  ******************************************************************************/
-#define CASE_RETURN_STR(const)          case const: return #const;
+extern TaskHandle_t  button_task_handle;
 
-#define FROM_BIT16_TO_8(val)            ((uint8_t)(((val) >> 8 )& 0xff))
+/*******************************************************************************
+*        Function Prototypes
+*******************************************************************************/
 
-/****************************************************************************
- *                              FUNCTION DECLARATIONS
- ***************************************************************************/
-void print_bd_address(wiced_bt_device_address_t bdadr);
+/*Button interrupt handler*/
+void button_interrupt_handler(void *handler_arg, cyhal_gpio_irq_event_t event);
+void button_task(void *pvParameters);
 
-void print_array(void * to_print, uint16_t len);
-
-const char *get_bt_event_name(wiced_bt_management_evt_t event);
-
-const char *get_bt_advert_mode_name(wiced_bt_ble_advert_mode_t mode);
-
-const char *get_bt_gatt_disconn_reason_name(wiced_bt_gatt_disconn_reason_t reason);
-
-const char *get_bt_gatt_status_name(wiced_bt_gatt_status_t status);
-
-const char *get_bt_smp_status_name(wiced_bt_smp_status_t status);
-
-#endif      /*__APP_BT_UTILS_H__ */
+/* Callback function for Bluetooth stack management events */
+wiced_bt_dev_status_t app_bt_management_callback (wiced_bt_management_evt_t event,
+                                                  wiced_bt_management_evt_data_t *p_event_data);
+/* [] END OF FILE */

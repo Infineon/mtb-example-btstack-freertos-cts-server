@@ -1,29 +1,30 @@
 /******************************************************************************
 * File Name:   app_bt_utils.c
 *
-* Description: This file consists of the utility functions that will help
-*              debugging and developing the applications easier with much
-*              more meaningful information.
+* Description: This file consists of the utility functions that will help debugging
+*              and developing the applications easier with much more meaningful
+*              information.
 *
 * Related Document: See Readme.md
 *
 *******************************************************************************
-* (c) 2020, Cypress Semiconductor Corporation. All rights reserved.
-*******************************************************************************
-* This software, including source code, documentation and related materials
-* ("Software"), is owned by Cypress Semiconductor Corporation or one of its
-* subsidiaries ("Cypress") and is protected by and subject to worldwide patent
-* protection (United States and foreign), United States copyright laws and
-* international treaty provisions. Therefore, you may use this Software only
-* as provided in the license agreement accompanying the software package from
-* which you obtained this Software ("EULA").
+* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
+* This software, including source code, documentation and related
+* materials ("Software") is owned by Cypress Semiconductor Corporation
+* or one of its affiliates ("Cypress") and is protected by and subject to
+* worldwide patent protection (United States and foreign),
+* United States copyright laws and international treaty provisions.
+* Therefore, you may use this Software only as provided in the license
+* agreement accompanying the software package from which you
+* obtained this Software ("EULA").
 * If no EULA applies, Cypress hereby grants you a personal, non-exclusive,
-* non-transferable license to copy, modify, and compile the Software source
-* code solely for use in connection with Cypress's integrated circuit products.
-* Any reproduction, modification, translation, compilation, or representation
-* of this Software except as specified above is prohibited without the express
-* written permission of Cypress.
+* non-transferable license to copy, modify, and compile the Software
+* source code solely for use in connection with Cypress's
+* integrated circuit products.  Any reproduction, modification, translation,
+* compilation, or representation of this Software except as specified
+* above is prohibited without the express written permission of Cypress.
 *
 * Disclaimer: THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND,
 * EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT, IMPLIED
@@ -34,9 +35,9 @@
 * not authorize its products for use in any products where a malfunction or
 * failure of the Cypress product may reasonably be expected to result in
 * significant property damage, injury or death ("High Risk Product"). By
-* including Cypress's product in a High Risk Product, the manufacturer of such
-* system or application assumes all risk of such use and in doing so agrees to
-* indemnify Cypress against all liability.
+* including Cypress's product in a High Risk Product, the manufacturer
+* of such system or application assumes all risk of such use and in doing
+* so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
 /******************************************************************************
@@ -48,9 +49,9 @@
 /****************************************************************************
  *                              FUNCTION DEFINITIONS
  ***************************************************************************/
-/**************************************************************************************************
+/*******************************************************************************
 * Function Name: print_bd_address()
-***************************************************************************************************
+********************************************************************************
 * Summary:
 *   This is the utility function that prints the address of the Bluetooth device
 *
@@ -60,10 +61,41 @@
 * Return:
 *  void
 *
-**************************************************************************************************/
+********************************************************************************/
 void print_bd_address(wiced_bt_device_address_t bdadr)
 {
-    printf("%02X:%02X:%02X:%02X:%02X:%02X\n",bdadr[0],bdadr[1],bdadr[2],bdadr[3],bdadr[4],bdadr[5]);
+    printf("%02X:%02X:%02X:%02X:%02X:%02X \n",bdadr[0],bdadr[1],bdadr[2],bdadr[3],
+           bdadr[4],bdadr[5]);
+}
+
+/*******************************************************************************
+* Function Name: void print_array( void* to_print, uint16_t len )
+********************************************************************************
+* Summary:
+*   This is a utility function that prints the specified number of values from memory
+*
+* Parameters:
+*   void* to_print                : Pointer to the location to print
+*   uint16_t                    : Number of bytes to print
+*
+* Return:
+*  void
+*
+********************************************************************************/
+void print_array(void * to_print, uint16_t len)
+{
+    uint16_t counter;
+
+    for( counter = 0; counter<len;counter++ )
+    {
+       if( counter % 16 == 0 )
+       {
+           printf( "\n" );
+       }
+        printf( "%02X ", *(((uint8_t *)(to_print)) + counter) );
+    }
+    printf( "\n" );
+
 }
 
 /*******************************************************************************
@@ -83,8 +115,10 @@ void print_bd_address(wiced_bt_device_address_t bdadr)
 *******************************************************************************/
 const char *get_bt_event_name(wiced_bt_management_evt_t event)
 {
+
     switch ( (int)event )
     {
+
     CASE_RETURN_STR(BTM_ENABLED_EVT)
     CASE_RETURN_STR(BTM_DISABLED_EVT)
     CASE_RETURN_STR(BTM_POWER_MANAGEMENT_STATUS_EVT)
@@ -120,9 +154,10 @@ const char *get_bt_event_name(wiced_bt_management_evt_t event)
 #ifdef CYW20819A1
     CASE_RETURN_STR(BTM_BLE_PHY_UPDATE_EVT)
 #endif
+
     }
 
-    return NULL;
+    return "UNKNOWN_EVENT";
 }
 
 /*******************************************************************************
@@ -142,8 +177,10 @@ const char *get_bt_event_name(wiced_bt_management_evt_t event)
 *******************************************************************************/
 const char *get_bt_advert_mode_name(wiced_bt_ble_advert_mode_t mode)
 {
+
     switch ( (int)mode )
     {
+
     CASE_RETURN_STR(BTM_BLE_ADVERT_OFF)
     CASE_RETURN_STR(BTM_BLE_ADVERT_DIRECTED_HIGH)
     CASE_RETURN_STR(BTM_BLE_ADVERT_DIRECTED_LOW)
@@ -153,9 +190,10 @@ const char *get_bt_advert_mode_name(wiced_bt_ble_advert_mode_t mode)
     CASE_RETURN_STR(BTM_BLE_ADVERT_NONCONN_LOW)
     CASE_RETURN_STR(BTM_BLE_ADVERT_DISCOVERABLE_HIGH)
     CASE_RETURN_STR(BTM_BLE_ADVERT_DISCOVERABLE_LOW)
+
     }
 
-    return NULL;
+    return "UNKNOWN_MODE";
 }
 
 /*******************************************************************************
@@ -175,8 +213,10 @@ const char *get_bt_advert_mode_name(wiced_bt_ble_advert_mode_t mode)
 *******************************************************************************/
 const char *get_bt_gatt_disconn_reason_name(wiced_bt_gatt_disconn_reason_t reason)
 {
+
     switch ( (int)reason )
     {
+
     CASE_RETURN_STR(GATT_CONN_UNKNOWN)
     CASE_RETURN_STR(GATT_CONN_L2C_FAILURE)
     CASE_RETURN_STR(GATT_CONN_TIMEOUT)
@@ -185,9 +225,10 @@ const char *get_bt_gatt_disconn_reason_name(wiced_bt_gatt_disconn_reason_t reaso
     CASE_RETURN_STR(GATT_CONN_FAIL_ESTABLISH)
     CASE_RETURN_STR(GATT_CONN_LMP_TIMEOUT)
     CASE_RETURN_STR(GATT_CONN_CANCEL)
+
     }
 
-    return NULL;
+    return "UNKNOWN_REASON";
 }
 
 /*******************************************************************************
@@ -207,9 +248,11 @@ const char *get_bt_gatt_disconn_reason_name(wiced_bt_gatt_disconn_reason_t reaso
 *******************************************************************************/
 const char *get_bt_gatt_status_name(wiced_bt_gatt_status_t status)
 {
+
     switch ( (int)status )
     {
-    CASE_RETURN_STR(WICED_BT_GATT_SUCCESS || WICED_BT_GATT_ENCRYPED_MITM)
+
+    CASE_RETURN_STR(WICED_BT_GATT_SUCCESS)
     CASE_RETURN_STR(WICED_BT_GATT_INVALID_HANDLE)
     CASE_RETURN_STR(WICED_BT_GATT_READ_NOT_PERMIT)
     CASE_RETURN_STR(WICED_BT_GATT_WRITE_NOT_PERMIT)
@@ -219,7 +262,7 @@ const char *get_bt_gatt_status_name(wiced_bt_gatt_status_t status)
     CASE_RETURN_STR(WICED_BT_GATT_INVALID_OFFSET)
     CASE_RETURN_STR(WICED_BT_GATT_INSUF_AUTHORIZATION)
     CASE_RETURN_STR(WICED_BT_GATT_PREPARE_Q_FULL)
-    CASE_RETURN_STR(WICED_BT_GATT_NOT_FOUND)
+    CASE_RETURN_STR(WICED_BT_GATT_ATTRIBUTE_NOT_FOUND)
     CASE_RETURN_STR(WICED_BT_GATT_NOT_LONG)
     CASE_RETURN_STR(WICED_BT_GATT_INSUF_KEY_SIZE)
     CASE_RETURN_STR(WICED_BT_GATT_INVALID_ATTR_LEN)
@@ -240,17 +283,68 @@ const char *get_bt_gatt_status_name(wiced_bt_gatt_status_t status)
     CASE_RETURN_STR(WICED_BT_GATT_MORE)
     CASE_RETURN_STR(WICED_BT_GATT_INVALID_CFG)
     CASE_RETURN_STR(WICED_BT_GATT_SERVICE_STARTED)
-    CASE_RETURN_STR(WICED_BT_GATT_ENCRYPED_NO_MITM)
+    CASE_RETURN_STR(WICED_BT_GATT_ENCRYPTED_NO_MITM)
     CASE_RETURN_STR(WICED_BT_GATT_NOT_ENCRYPTED)
     CASE_RETURN_STR(WICED_BT_GATT_CONGESTED)
     CASE_RETURN_STR(WICED_BT_GATT_WRITE_REQ_REJECTED)
     CASE_RETURN_STR(WICED_BT_GATT_CCC_CFG_ERR)
     CASE_RETURN_STR(WICED_BT_GATT_PRC_IN_PROGRESS)
     CASE_RETURN_STR(WICED_BT_GATT_OUT_OF_RANGE)
+
     }
 
-    return NULL;
+    return "UNKNOWN_STATUS";
 }
 
+/*******************************************************************************
+* Function Name: get_bt_smp_status_name
+********************************************************************************
+* Summary:
+* The function converts the wiced_bt_smp_status_t enum value to its corresponding
+* string literal. This will help the programmer to debug easily with log traces
+* without navigating through the source code.
+*
+* Parameters:
+*  wiced_bt_smp_status_t status: GATT status
+*
+* Return:
+*  wiced_bt_smp_status_t
+*
+*******************************************************************************/
+const char *get_bt_smp_status_name(wiced_bt_smp_status_t status)
+{
 
+    switch ((int)status)
+    {
+
+        CASE_RETURN_STR(SMP_SUCCESS)                 /**< Success */
+        CASE_RETURN_STR(SMP_PASSKEY_ENTRY_FAIL)      /**< Passkey entry failed */
+        CASE_RETURN_STR(SMP_OOB_FAIL)                /**< OOB failed */
+        CASE_RETURN_STR(SMP_PAIR_AUTH_FAIL)          /**< Authentication failed */
+        CASE_RETURN_STR(SMP_CONFIRM_VALUE_ERR)       /**< Value confirmation failed */
+        CASE_RETURN_STR(SMP_PAIR_NOT_SUPPORT)        /**< Not supported */
+        CASE_RETURN_STR(SMP_ENC_KEY_SIZE)            /**< Encryption key size failure */
+        CASE_RETURN_STR(SMP_INVALID_CMD)             /**< Invalid command */
+        CASE_RETURN_STR(SMP_PAIR_FAIL_UNKNOWN)       /**< Unknown failure */
+        CASE_RETURN_STR(SMP_REPEATED_ATTEMPTS)       /**< Repeated attempts */
+        CASE_RETURN_STR(SMP_INVALID_PARAMETERS)      /**< Invalid parameters  */
+        CASE_RETURN_STR(SMP_DHKEY_CHK_FAIL)          /**< DH Key check failed */
+        CASE_RETURN_STR(SMP_NUMERIC_COMPAR_FAIL)     /**< Numeric comparison failed */
+        CASE_RETURN_STR(SMP_BR_PAIRING_IN_PROGR)     /**< BR paIring in progress */
+        CASE_RETURN_STR(SMP_XTRANS_DERIVE_NOT_ALLOW) /**< Cross transport key derivation not allowed */
+        /* bte smp status codes */
+        CASE_RETURN_STR(SMP_PAIR_INTERNAL_ERR) /**< Internal error */
+        CASE_RETURN_STR(SMP_UNKNOWN_IO_CAP)    /**< unknown IO capability, unable to decide associatino model */
+        CASE_RETURN_STR(SMP_INIT_FAIL)         /**< Initialization failed */
+        CASE_RETURN_STR(SMP_CONFIRM_FAIL)      /**< Confirmation failed */
+        CASE_RETURN_STR(SMP_BUSY)              /**< Busy */
+        CASE_RETURN_STR(SMP_ENC_FAIL)          /**< Encryption failed */
+        CASE_RETURN_STR(SMP_STARTED)           /**< Started */
+        CASE_RETURN_STR(SMP_RSP_TIMEOUT)       /**< Response timeout */
+        CASE_RETURN_STR(SMP_FAIL)              /**< Generic failure */
+        CASE_RETURN_STR(SMP_CONN_TOUT)         /**< Connection timeout */
+    }
+
+    return "UNKNOWN_STATUS";
+}
 /* [] END OF FILE */
