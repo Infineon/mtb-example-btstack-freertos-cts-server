@@ -72,7 +72,7 @@ extern TaskHandle_t  button_task_handle;
 *******************************************************************************/
 
 /*Button interrupt handler*/
-void button_interrupt_handler(void *handler_arg, cyhal_gpio_irq_event_t event);
+void button_interrupt_handler(void *handler_arg, cyhal_gpio_event_t event);
 void button_task(void *pvParameters);
 
 /* Callback function for Bluetooth stack management events */

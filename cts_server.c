@@ -94,6 +94,13 @@ static void* app_alloc_buffer(int len);
 static void app_free_buffer(uint8_t *p_event_data);
 gatt_db_lookup_table_t* app_get_attribute(uint16_t handle);
 
+/* Configure GPIO interrupt. */
+cyhal_gpio_callback_data_t button_cb_data =
+{
+.callback = button_interrupt_handler,
+.callback_arg = NULL
+};
+
 /********************************************************************************
 * Function Name: app_bt_management_callback
 *********************************************************************************
@@ -194,7 +201,7 @@ static void ble_app_init(void)
     }
 
     /* Configure GPIO interrupt. */
-    cyhal_gpio_register_callback(CYBSP_USER_BTN, button_interrupt_handler, NULL);
+    cyhal_gpio_register_callback(CYBSP_USER_BTN,&button_cb_data);
     cyhal_gpio_enable_event(CYBSP_USER_BTN, CYHAL_GPIO_IRQ_FALL,
                             BUTTON_INTERRUPT_PRIORITY, true);
 
@@ -754,7 +761,7 @@ static void ctss_send_notification(void)
 *   None
 *
 *******************************************************************************/
-void button_interrupt_handler(void *handler_arg, cyhal_gpio_irq_event_t event)
+void button_interrupt_handler(void *handler_arg, cyhal_gpio_event_t event)
 {
     BaseType_t xHigherPriorityTaskWoken;
     xHigherPriorityTaskWoken = pdFALSE;
