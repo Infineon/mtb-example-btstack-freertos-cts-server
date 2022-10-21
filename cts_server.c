@@ -8,7 +8,7 @@
 * Related Document: See README.md
 *
 *******************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2022, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -163,7 +163,7 @@ wiced_result_t app_bt_management_callback(wiced_bt_management_evt_t event,
 
         default:
             printf("Unhandled Bluetooth Management Event: 0x%x %s\n", event,
-                                                   get_bt_event_name(event));
+                                                   get_btm_event_name(event));
             break;
     }
     return result;

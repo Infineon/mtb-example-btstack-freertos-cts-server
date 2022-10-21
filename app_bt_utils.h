@@ -8,7 +8,7 @@
 * Related Document: See Readme.md
 *
 *******************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2022, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -64,7 +64,7 @@ void print_bd_address(wiced_bt_device_address_t bdadr);
 
 void print_array(void * to_print, uint16_t len);
 
-const char *get_bt_event_name(wiced_bt_management_evt_t event);
+const char *get_btm_event_name(wiced_bt_management_evt_t event);
 
 const char *get_bt_advert_mode_name(wiced_bt_ble_advert_mode_t mode);
 

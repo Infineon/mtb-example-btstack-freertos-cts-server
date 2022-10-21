@@ -8,7 +8,7 @@
 * Related Document: See Readme.md
 *
 *******************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2022, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -99,7 +99,7 @@ void print_array(void * to_print, uint16_t len)
 }
 
 /*******************************************************************************
-* Function Name: get_bt_event_name
+* Function Name: get_btm_event_name
 ********************************************************************************
 * Summary:
 * The function converts the wiced_bt_management_evt_t enum value to its
@@ -113,7 +113,7 @@ void print_array(void * to_print, uint16_t len)
 *  wiced_bt_management_evt_t
 *
 *******************************************************************************/
-const char *get_bt_event_name(wiced_bt_management_evt_t event)
+const char *get_btm_event_name(wiced_bt_management_evt_t event)
 {
 
     switch ( (int)event )
@@ -151,6 +151,7 @@ const char *get_bt_event_name(wiced_bt_management_evt_t event)
     CASE_RETURN_STR(BTM_SCO_CONNECTION_REQUEST_EVT)
     CASE_RETURN_STR(BTM_SCO_CONNECTION_CHANGE_EVT)
     CASE_RETURN_STR(BTM_BLE_CONNECTION_PARAM_UPDATE)
+    CASE_RETURN_STR(BTM_BLE_DATA_LENGTH_UPDATE_EVENT)
 #ifdef CYW20819A1
     CASE_RETURN_STR(BTM_BLE_PHY_UPDATE_EVT)
 #endif
