@@ -54,6 +54,7 @@
 #include <task.h>
 #include "cycfg_bt_settings.h"
 #include "cts_server.h"
+#include "cybsp_bt_config.h"
 
 /*******************************************************************************
 *        Variable Definitions
