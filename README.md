@@ -8,7 +8,7 @@ This code example along with [Bluetooth&reg; LE CTS Client](https://github.com/I
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-btstack-freertos-cts-server)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMzAzMDIiLCJTcGVjIE51bWJlciI6IjAwMi0zMDMwMiIsIkRvYyBUaXRsZSI6IkJsdWV0b290aCZyZWc7IExFIENUUyBzZXJ2ZXIiLCJyaWQiOiJiaGFuYXJrYXIiLCJEb2MgdmVyc2lvbiI6IjUuMi4wIiwiRG9jIExhbmd1YWdlIjoiRW5nbGlzaCIsIkRvYyBEaXZpc2lvbiI6Ik1DRCIsIkRvYyBCVSI6IklDVyIsIkRvYyBGYW1pbHkiOiJCVEFCTEUifQ==)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMzAzMDIiLCJTcGVjIE51bWJlciI6IjAwMi0zMDMwMiIsIkRvYyBUaXRsZSI6IkJsdWV0b290aCZyZWc7IExFIENUUyBzZXJ2ZXIiLCJyaWQiOiJiaGFuYXJrYXIiLCJEb2MgdmVyc2lvbiI6IjYuMC4wIiwiRG9jIExhbmd1YWdlIjoiRW5nbGlzaCIsIkRvYyBEaXZpc2lvbiI6Ik1DRCIsIkRvYyBCVSI6IklDVyIsIkRvYyBGYW1pbHkiOiJCVEFCTEUifQ==)
 
 
 ## Requirements
@@ -17,7 +17,7 @@ This code example along with [Bluetooth&reg; LE CTS Client](https://github.com/I
 - Board support package (BSP) minimum required version for:
    - PSOC&trade; 6 MCU: v5.0.0
    - XMC7000 MCU: v2.3.0
-   - CYW920829M2EVK-02/CYW989829M2EVB-01/CYW989829M2EVB-03: v2.0.0
+   - CYW920829M2EVK-02/CYW989829M2EVB-01: v3.0.0
 - Programming language: C
 - Associated parts: All [XMC7000 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-industrial-microcontroller-based-on-arm-cortex-m/32-bit-xmc7000-industrial-microcontroller-arm-cortex-m7/) and [PSOC&trade; 6 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu) parts, [AIROC&trade; CYW43012 Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw43012), [AIROC&trade; CYW4343W Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw4343w), [AIROC&trade; CYW43438 Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw43438), [AIROC&trade; CYW4373 Wi-Fi & Bluetooth&trade; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw4373), [AIROC&trade; CYW43022 Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-5-802.11ac/cyw43022).
 
@@ -32,7 +32,7 @@ This code example along with [Bluetooth&reg; LE CTS Client](https://github.com/I
 ## Supported kits (make variable 'TARGET')
 
 - [AIROC&trade; CYW20829 Bluetooth&reg; LE Evaluation Kit](https://www.infineon.com/CYW920829M2EVK-02) (`CYW920829M2EVK-02`) – Default value of `TARGET`
-- AIROC&trade; CYW89829 Bluetooth&reg; LE Evaluation Kit(`CYW989829M2EVB-01`,`CYW989829M2EVB-03`)
+- AIROC&trade; CYW89829 Bluetooth&reg; LE Evaluation Kit(`CYW989829M2EVB-01`)
 - [PSOC&trade; 6 Wi-Fi Bluetooth&reg; Prototyping Kit](https://www.infineon.com/CY8CPROTO-062-4343W) (`CY8CPROTO-062-4343W`)
 - [PSOC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CY8CKIT-062-WIFI-BT) (`CY8CKIT-062-WIFI-BT`)
 - [PSOC&trade; 62S2 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CY8CKIT-062S2-43012) (`CY8CKIT-062S2-43012`, `CY8CEVAL-062S2-CYW955513SDM2WLIPA`)
@@ -442,6 +442,7 @@ Document title: *CE230302* – *Bluetooth&reg; LE CTS server*
  5.0.0   | BSP and BTStack-integration major update for BT Firmware as a separate asset and removal of combo devices as doesn't support fw as separate asset
  5.1.0   | Added support for CY8CEVAL-062S2-CYW955513SDM2WLIPA
  5.2.0   | Added support for KIT_XMC72_EVK_MUR_43439M2
+ 6.0.0   | Remove support for CYW989829M2EVB-03 and updated btstack-integration with version 6.X
 <br>
 
 
